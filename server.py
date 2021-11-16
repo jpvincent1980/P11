@@ -46,6 +46,7 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
+    # Debug bug/Clubs-should-not-be-able-to-use-more-points-than-allowed
     availablePoints = int(club.get('points', None))
     if placesRequired > availablePoints:
         message = f"You don't have enough points to book {placesRequired} places."
