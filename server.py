@@ -24,10 +24,22 @@ clubs = loadClubs()
 def index():
     return render_template('index.html')
 
+
 @app.route('/showSummary',methods=['POST'])
 def showSummary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
-    return render_template('welcome.html',club=club,competitions=competitions)
+    """
+    Route to index page when users can login.
+
+    :return: a template
+    """
+    try:
+        club = [club for club in clubs if club['email'] == request.form['email']][0]
+        return render_template('welcome.html',club=club,competitions=competitions)
+    except IndexError:
+        message = "Sorry, that email wasn't found."
+        flash(message, 'error')
+        return redirect(url_for('index'))
+
 
 
 @app.route('/book/<competition>/<club>')
