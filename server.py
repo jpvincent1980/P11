@@ -32,6 +32,7 @@ def showSummary():
 
     :return: a template
     """
+    # Debug bug/Entering-a-unknown-email-crashes-the-app
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
         return render_template('welcome.html',club=club,competitions=competitions)
