@@ -80,6 +80,8 @@ def purchasePlaces():
         return render_template('welcome.html', club=club,
                                competitions=competitions)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
+    # Debug bug/Point-updates-are-not-reflected
+    club['points'] = int(club['points'])-placesRequired
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions, availablePoints=availablePoints)
 
