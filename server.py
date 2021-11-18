@@ -64,7 +64,8 @@ def purchasePlaces():
     availablePoints = int(club.get('points', None))
     competitionDate = datetime.datetime.strptime(competition['date'],
                                                  '%Y-%m-%d %H:%M:%S')
-    if placesRequired > availablePoints:
+    # Fonctionnalite -> 1 place = 3 points
+    if (placesRequired*3) > availablePoints:
         message = f"You don't have enough points to book {placesRequired} places."
         flash(message, 'error')
         return render_template('welcome.html', club=club, competitions=competitions)
@@ -81,7 +82,8 @@ def purchasePlaces():
                                competitions=competitions)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
     # Debug bug/Point-updates-are-not-reflected
-    club['points'] = int(club['points'])-placesRequired
+    # Fonctionnalite -> 1 place = 3 points
+    club['points'] = int(club['points'])-(placesRequired*3)
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions, availablePoints=availablePoints)
 
