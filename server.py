@@ -61,6 +61,8 @@ def purchasePlaces():
     placesRequired = int(request.form['places'])
     # Debug bug/Clubs-should-not-be-able-to-use-more-points-than-allowed
     availablePoints = int(club.get('points', None))
+    competitionDate = datetime.datetime.strptime(competition['date'],
+                                                 '%Y-%m-%d %H:%M:%S')
     if placesRequired > availablePoints:
         message = f"You don't have enough points to book {placesRequired} places."
         flash(message, 'error')
@@ -70,6 +72,12 @@ def purchasePlaces():
         message = "You can't book more than 12 places per competition."
         flash(message, 'error')
         return render_template('welcome.html', club=club, competitions=competitions)
+    # Debug bug/Booking-places-in-past-competitions
+    elif competitionDate < datetime.datetime.now():
+        message = "You can't book places for a competition that is past."
+        flash(message, 'error')
+        return render_template('welcome.html', club=club,
+                               competitions=competitions)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions, availablePoints=availablePoints)
