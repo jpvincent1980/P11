@@ -43,7 +43,6 @@ def showSummary():
         return redirect(url_for('index'))
 
 
-
 @app.route('/book/<competition>/<club>')
 def book(competition,club):
     foundClub = [c for c in clubs if c['name'] == club][0]

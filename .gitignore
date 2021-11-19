@@ -3,7 +3,6 @@ include
 lib
 .idea
 .Python
-tests/
 Documents/
 .envrc
 __pycache__
