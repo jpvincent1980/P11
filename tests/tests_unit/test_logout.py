@@ -9,4 +9,3 @@ def test_logout():
     response = server.app.test_client()
     assert response.get('/logout').status_code == 302
     assert b'target URL: <a href="/">/</a>' in response.get('logout').data
-

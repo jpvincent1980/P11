@@ -69,5 +69,3 @@ class TestPurchasePlaces:
                                                            places="13"))
         message = "You can&#39;t book more than 12 places per competition."
         assert message.encode("utf-8") in response.data
-
-

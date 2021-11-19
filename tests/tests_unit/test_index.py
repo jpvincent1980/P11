@@ -7,4 +7,3 @@ def test_index():
     """
     response = server.app.test_client()
     assert response.get('/').status_code == 200
-

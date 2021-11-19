@@ -28,4 +28,3 @@ class TestShowSummary:
         response = server.app.test_client()
         assert response.post('/showSummary',
                              data=dict(email="unknown@address.com")).status_code == 302
-

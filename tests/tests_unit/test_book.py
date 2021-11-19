@@ -30,7 +30,9 @@ class TestBook:
                                                 test_dict['name'])
         assert response.status_code == 500
 
-    def test_failure_book_2(self, fixture_load_clubs, fixture_load_competitions):
+    def test_failure_book_2(self,
+                            fixture_load_clubs,
+                            fixture_load_competitions):
         """
         Tests if book view is working by checking response
         status code of an invalid URL path.
@@ -40,5 +42,3 @@ class TestBook:
                                                 + '/' +
                                                 "fake_name")
         assert response.status_code == 500
-
-
