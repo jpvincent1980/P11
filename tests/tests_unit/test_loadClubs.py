@@ -1,14 +1,18 @@
+import json
+
 from ... import server
 
 
 def test_load_clubs():
-    assert len(server.loadClubs()) == 3
-    assert server.loadClubs()[0] == {
+    with open('tests/tests_unit/test_clubs.json') as c:
+        listOfClubs = json.load(c)['clubs']
+    assert len(listOfClubs) == 3
+    assert listOfClubs[0] == {
         "name": "Simply Lift",
         "email": "john@simplylift.co",
         "points": "13"
     }
-    assert server.loadClubs() == [
+    assert listOfClubs == [
         {
             "name": "Simply Lift",
             "email": "john@simplylift.co",

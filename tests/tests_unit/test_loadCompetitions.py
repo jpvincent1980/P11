@@ -1,14 +1,21 @@
+import json
+
 from ... import server
 
 
 def test_load_competitions():
-    assert len(server.loadCompetitions()) == 2
-    assert server.loadCompetitions()[0] == {
+    """
+    A function that tests the loading of the competitions json file.
+    """
+    with open('tests/tests_unit/test_competitions.json') as comps:
+        listOfCompetitions = json.load(comps)['competitions']
+    assert len(listOfCompetitions) == 2
+    assert listOfCompetitions[0] == {
             "name": "Spring Festival",
             "date": "2022-03-27 10:00:00",
             "numberOfPlaces": "25"
         }
-    assert server.loadCompetitions() == [
+    assert listOfCompetitions == [
         {
             "name": "Spring Festival",
             "date": "2022-03-27 10:00:00",

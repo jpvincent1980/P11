@@ -22,7 +22,6 @@ class TestPurchasePlaces:
         assert message.encode("utf-8") in response.data
         remaining_clubs_points = int(test_dict["points"]) - int(test_dict["bookedPlaces"])*3
         remaining_clubs_points = "Points available: " + str(remaining_clubs_points)
-        print(response.data)
         assert remaining_clubs_points.encode("utf-8") in response.data
         remaining_competition_places = int(test_dict["numberOfPlaces"]) - int(test_dict["bookedPlaces"])
         remaining_competition_places = "Number of Places: " + str(remaining_competition_places)
