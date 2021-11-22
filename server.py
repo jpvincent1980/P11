@@ -1,5 +1,6 @@
 import json
 import datetime
+
 from flask import Flask, render_template, request, redirect, flash, url_for
 
 
@@ -61,13 +62,19 @@ def book(competition, club):
     """
     Route to book page where users can book places for competitions.
     """
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
-        return render_template('booking.html', club=foundClub, competition=foundCompetition)
-    else:
+    try:
+        foundClub = [c for c in clubs if c['name'] == club][0]
+    except IndexError:
         flash("Something went wrong-please try again")
-        return render_template('welcome.html', club=club, competitions=competitions)
+        return render_template('welcome.html', club=club,
+                               competitions=competitions)
+    try:
+        foundCompetition = [c for c in competitions if c['name'] == competition][0]
+    except IndexError:
+        flash("Something went wrong-please try again")
+        return render_template('welcome.html', club=club,
+                               competitions=competitions)
+    return render_template('booking.html', club=foundClub, competition=foundCompetition)
 
 
 @app.route('/purchasePlaces', methods=['POST'])

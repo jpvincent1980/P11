@@ -28,7 +28,8 @@ class TestBook:
                                                 "fake_competition"
                                                 + '/' +
                                                 test_dict['name'])
-        assert response.status_code == 500
+        assert response.status_code == 200
+        assert b"Something went wrong-please try again" in response.data
 
     def test_failure_book_2(self,
                             fixture_load_clubs,
@@ -41,4 +42,5 @@ class TestBook:
                                                 test_dict['competition']
                                                 + '/' +
                                                 "fake_name")
-        assert response.status_code == 500
+        assert response.status_code == 200
+        assert b"Something went wrong-please try again" in response.data
